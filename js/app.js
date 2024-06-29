@@ -15,12 +15,14 @@ const validarFormulario = (event) => {
 	if (event.target.name === 'usuario')
 		return validarCampo(expresiones.usuario, event.target.value, 'usuario');
 
-	if (event.target.name === 'password')
+	if (event.target.name === 'password') {
+		validarPassword2();
 		return validarCampo(
 			expresiones.password,
 			event.target.value,
 			'password',
 		);
+	}
 
 	if (event.target.name === 'correo')
 		return validarCampo(expresiones.correo, event.target.value, 'correo');
@@ -28,8 +30,7 @@ const validarFormulario = (event) => {
 	if (event.target.name === 'nombre')
 		return validarCampo(expresiones.nombre, event.target.value, 'nombre');
 
-	if (event.target.name === 'password2')
-		return console.log('validando campo de repetir contrasña');
+	if (event.target.name === 'password2') return validarPassword2();
 
 	if (event.target.name === 'telefono')
 		return validarCampo(
@@ -51,11 +52,11 @@ const validarCampo = (exprecion, input, campo) => {
 
 		document
 			.querySelector(`#grupo__${campo} i`)
-			.classList.add('fa-check-circle');
+			.classList.add('fa-circle-check');
 
 		document
 			.querySelector(`#grupo__${campo} i`)
-			.classList.remove('fa-times-circle');
+			.classList.remove('fa-circle-xmark');
 
 		document
 			.querySelector(`#grupo__${campo} .formulario__input-error`)
@@ -71,10 +72,10 @@ const validarCampo = (exprecion, input, campo) => {
 
 		document
 			.querySelector(`#grupo__${campo} i`)
-			.classList.add('fa-times-circle');
+			.classList.add('fa-circle-xmark');
 		document
 			.querySelector(`#grupo__${campo} i`)
-			.classList.remove('fa-check-circle');
+			.classList.remove('fa-circle-check');
 
 		document
 			.querySelector(`#grupo__${campo} .formulario__input-error`)
@@ -82,8 +83,52 @@ const validarCampo = (exprecion, input, campo) => {
 	}
 };
 
+const validarPassword2 = () => {
+	const inputPassword1 = document.getElementById('password');
+	const password2 = document.getElementById('password2');
+
+	if (inputPassword1.value !== password2.value) {
+		document
+			.getElementById(`grupo__password2`)
+			.classList.add('formulario__grupo-incorrecto');
+
+		document
+			.getElementById(`grupo__password2`)
+			.classList.remove('formulario__grupo-correcto');
+		document
+			.querySelector(`#grupo__password2 i`)
+			.classList.add('fa-circle-xmark');
+		document
+			.querySelector(`#grupo__password2 i`)
+			.classList.remove('fa-circle-check');
+		document
+			.querySelector(`#grupo__password2 .formulario__input-error`)
+			.classList.add('formulario__input-error-activo');
+	} else {
+		document
+			.getElementById(`grupo__password2`)
+			.classList.remove('formulario__grupo-incorrecto');
+
+		document
+			.getElementById(`grupo__password2`)
+			.classList.add('formulario__grupo-correcto');
+
+		document
+			.querySelector(`#grupo__password2 i`)
+			.classList.remove('fa-circle-xmark');
+
+		document
+			.querySelector(`#grupo__password2 i`)
+			.classList.add('fa-circle-check');
+
+		document
+			.querySelector(`#grupo__password2 .formulario__input-error`)
+			.classList.remove('formulario__input-error-activo');
+	}
+};
+
 projectoSelector.input.forEach((input) => {
-	input.addEventListener('input', validarFormulario);
+	input.addEventListener('keyup', validarFormulario);
 	input.addEventListener('blur', validarFormulario);
 });
 
