@@ -11,6 +11,34 @@ const expresiones = {
 	telefono: /^\d{7,14}$/, // 7 a 14 numeros.
 };
 
+const validarFormulario = (event) => {
+	if (event.target.name === 'usuario')
+		return validarCampo(expresiones.usuario, event.target.value, 'usuario');
+
+	if (event.target.name === 'password')
+		return validarCampo(
+			expresiones.password,
+			event.target.value,
+			'password',
+		);
+
+	if (event.target.name === 'correo')
+		return validarCampo(expresiones.correo, event.target.value, 'correo');
+
+	if (event.target.name === 'nombre')
+		return validarCampo(expresiones.nombre, event.target.value, 'nombre');
+
+	if (event.target.name === 'password2')
+		return console.log('validando campo de repetir contrasña');
+
+	if (event.target.name === 'telefono')
+		return validarCampo(
+			expresiones.telefono,
+			event.target.value,
+			'telefono',
+		);
+};
+
 const validarCampo = (exprecion, input, campo) => {
 	if (exprecion.test(input)) {
 		document
@@ -42,9 +70,8 @@ const validarCampo = (exprecion, input, campo) => {
 			.classList.remove('formulario__grupo-correcto');
 
 		document
-			.querySelector(`#grupo__${campo}`)
+			.querySelector(`#grupo__${campo} i`)
 			.classList.add('fa-times-circle');
-
 		document
 			.querySelector(`#grupo__${campo} i`)
 			.classList.remove('fa-check-circle');
@@ -53,26 +80,6 @@ const validarCampo = (exprecion, input, campo) => {
 			.querySelector(`#grupo__${campo} .formulario__input-error`)
 			.classList.add('formulario__input-error-activo');
 	}
-};
-
-const validarFormulario = (event) => {
-	if (event.target.name === 'usuario')
-		return validarCampo(expresiones.usuario, event.target.value, 'usuario');
-
-	if (event.target.name === 'password')
-		console.log('validando campo de contraseña');
-
-	if (event.target.name === 'correo')
-		return console.log('validando campo correo');
-
-	if (event.target.name === 'nombre')
-		return console.log('validando campo de nombre');
-
-	if (event.target.name === 'password2')
-		return console.log('validando campo de repetir contrasña');
-
-	if (event.target.name === 'telefono')
-		return console.log('validando campo de telefono');
 };
 
 projectoSelector.input.forEach((input) => {
