@@ -1,3 +1,4 @@
+![alt text](<bandicam 2024-06-29 23-52-05-145.jpg>)
 # Validación de Formulario
 
 Este proyecto es parte del reto #72DayOfCode y se enfoca en la validación de formularios utilizando JavaScript.
