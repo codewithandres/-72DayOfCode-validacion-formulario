@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+
 * {
     box-sizing: border-box;
 }
 
 body {
     font-family: 'Roboto', sans-serif;
-    background: #E5E5E5;
+    background: hsl(257, 95%, 7%);
 }
 
 main {
@@ -14,10 +16,21 @@ main {
     padding: 40px;
 }
 
+h1 {
+    font-family: "Oswald", sans-serif;
+    font-size: 3em;
+    text-align: center;
+    color: hsla(266, 78%, 96%, 0.8);
+    /*text-transform: uppercase;*/
+}
+
 .formulario {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
+    box-shadow: rgba(18, 0, 51, 0.05) 0px 6px 24px 0px, rgba(255, 255, 255, 0.08) 0px 0px 0px 1px;
+    padding: 1em;
+    border-radius: .4em;
 }
 
 .formulario__label {
@@ -25,6 +38,7 @@ main {
     font-weight: 700;
     padding: 10px;
     cursor: pointer;
+    color: hsla(263, 100%, 94%, 0.8);
 }
 
 .formulario__grupo-input {
@@ -33,13 +47,15 @@ main {
 
 .formulario__input {
     width: 100%;
-    background: #fff;
+    background: transparent;
+    box-shadow: hsla(0, 0%, 95%, 0.02) 0px 1px 3px 0px, hsla(211, 64%, 84%, 0.15) 0px 0px 0px 1px;
     border: 3px solid transparent;
     border-radius: 3px;
     height: 45px;
     line-height: 45px;
     padding: 0 40px 0 10px;
     transition: .3s ease all;
+    color: #cccc;
 }
 
 .formulario__input:focus {
@@ -52,6 +68,7 @@ main {
     font-size: 12px;
     margin-bottom: 0;
     display: none;
+    color: hsla(263, 100%, 94%, 0.8);
 }
 
 .formulario__input-error-activo {
@@ -103,18 +120,18 @@ main {
 .formulario__btn {
     height: 45px;
     line-height: 45px;
-    width: 30%;
-    background: #000;
+    width: 50%;
+    background: hsl(276, 100%, 16%);
     color: #fff;
     font-weight: bold;
     border: none;
-    border-radius: 3px;
+    border-radius: 5px;
     cursor: pointer;
     transition: .1s ease all;
 }
 
 .formulario__btn:hover {
-    box-shadow: 3px 0px 30px rgba(163, 163, 163, 1);
+    box-shadow: 3px 0px 30px rgb(36, 2, 80);
 }
 
 .formulario__mensaje-exito {
