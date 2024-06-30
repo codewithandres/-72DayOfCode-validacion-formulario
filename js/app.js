@@ -11,6 +11,15 @@ const expresiones = {
 	telefono: /^\d{7,14}$/, // 7 a 14 numeros.
 };
 
+const campos = {
+	usuario: false,
+	nombre: false,
+	password: false,
+	password2: false,
+	correo: false,
+	telefono: false,
+};
+
 const validarFormulario = (event) => {
 	if (event.target.name === 'usuario')
 		return validarCampo(expresiones.usuario, event.target.value, 'usuario');
@@ -45,41 +54,38 @@ const validarCampo = (exprecion, input, campo) => {
 		document
 			.getElementById(`grupo__${campo}`)
 			.classList.remove('formulario__grupo-incorrecto');
-
 		document
 			.getElementById(`grupo__${campo}`)
-			.classList.remove('formulario__grupo-correcto');
-
+			.classList.add('formulario__grupo-correcto');
 		document
 			.querySelector(`#grupo__${campo} i`)
-			.classList.add('fa-circle-check');
-
+			.classList.add('fa-check-circle');
 		document
 			.querySelector(`#grupo__${campo} i`)
-			.classList.remove('fa-circle-xmark');
-
+			.classList.remove('fa-times-circle');
 		document
 			.querySelector(`#grupo__${campo} .formulario__input-error`)
 			.classList.remove('formulario__input-error-activo');
+
+		campos[campo] = true;
 	} else {
 		document
 			.getElementById(`grupo__${campo}`)
 			.classList.add('formulario__grupo-incorrecto');
-
 		document
 			.getElementById(`grupo__${campo}`)
 			.classList.remove('formulario__grupo-correcto');
-
 		document
 			.querySelector(`#grupo__${campo} i`)
-			.classList.add('fa-circle-xmark');
+			.classList.add('fa-times-circle');
 		document
 			.querySelector(`#grupo__${campo} i`)
-			.classList.remove('fa-circle-check');
-
+			.classList.remove('fa-check-circle');
 		document
 			.querySelector(`#grupo__${campo} .formulario__input-error`)
 			.classList.add('formulario__input-error-activo');
+
+		campos[campo] = false;
 	}
 };
 
@@ -91,39 +97,37 @@ const validarPassword2 = () => {
 		document
 			.getElementById(`grupo__password2`)
 			.classList.add('formulario__grupo-incorrecto');
-
 		document
 			.getElementById(`grupo__password2`)
 			.classList.remove('formulario__grupo-correcto');
 		document
 			.querySelector(`#grupo__password2 i`)
-			.classList.add('fa-circle-xmark');
+			.classList.add('fa-times-circle');
 		document
 			.querySelector(`#grupo__password2 i`)
-			.classList.remove('fa-circle-check');
+			.classList.remove('fa-check-circle');
 		document
 			.querySelector(`#grupo__password2 .formulario__input-error`)
 			.classList.add('formulario__input-error-activo');
+		campos['password'] = false;
 	} else {
 		document
 			.getElementById(`grupo__password2`)
 			.classList.remove('formulario__grupo-incorrecto');
-
 		document
 			.getElementById(`grupo__password2`)
 			.classList.add('formulario__grupo-correcto');
-
 		document
 			.querySelector(`#grupo__password2 i`)
-			.classList.remove('fa-circle-xmark');
-
+			.classList.remove('fa-times-circle');
 		document
 			.querySelector(`#grupo__password2 i`)
-			.classList.add('fa-circle-check');
-
+			.classList.add('fa-check-circle');
 		document
 			.querySelector(`#grupo__password2 .formulario__input-error`)
 			.classList.remove('formulario__input-error-activo');
+
+		campos['password'] = true;
 	}
 };
 
@@ -134,4 +138,42 @@ projectoSelector.input.forEach((input) => {
 
 projectoSelector.form.addEventListener('submit', (event) => {
 	event.preventDefault();
+	const terminos = document.getElementById('terminos');
+	if (
+		campos.usuario &&
+		campos.nombre &&
+		campos.password &&
+		campos.correo &&
+		campos.telefono &&
+		terminos.checked
+	) {
+		const { form } = projectoSelector;
+		form.reset();
+
+		document
+			.getElementById('formulario__mensaje-exito')
+			.classList.add('formulario__mensaje-exito-activo');
+
+		setTimeout(() => {
+			document
+				.getElementById('formulario__mensaje-exito')
+				.classList.remove('formulario__mensaje-exito-activo');
+		}, 5000);
+
+		document
+			.querySelectorAll('.formulario__grupo-correcto')
+			.forEach((icono) => {
+				icono.classList.remove('formulario__grupo-correcto');
+			});
+	} else {
+		document
+			.getElementById('formulario__mensaje')
+			.classList.add('formulario__mensaje-activo');
+
+		setTimeout(() => {
+			document
+				.getElementById('formulario__mensaje')
+				.classList.remove('formulario__mensaje-activo');
+		}, 5000);
+	}
 });
