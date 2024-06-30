@@ -166,6 +166,10 @@ h1 {
 
 /* ----- -----  Mediaqueries ----- ----- */
 @media screen and (max-width: 800px) {
+    main {
+        padding: 1em;
+    }
+
     .formulario {
         grid-template-columns: 1fr;
     }
